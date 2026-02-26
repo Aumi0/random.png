@@ -1,181 +1,183 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Admin GIF Collection</title>
-    <style>
-        :root {
-            --bg-color: #0f0f0f;
-            --card-bg: #1a1a1a;
-            --text-color: #ffffff;
-            --accent-color: #3d5afe;
-        }
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Random img</title>
+    <style>
+        :root {
+            --bg-color: #0f0f0f;
+            --card-bg: #1a1a1a;
+            --text-color: #ffffff;
+            --accent-color: #3d5afe;
+        }
 
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0;
-            padding: 20px;
-        }
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
 
-        header {
-            text-align: center;
-            padding: 40px 0;
-        }
+        header {
+            text-align: center;
+            padding: 40px 0;
+        }
 
-        /* --- Updated Upload Section --- */
-        .upload-container {
-            max-width: 600px;
-            margin: 0 auto 40px auto;
-            display: flex;
-            flex-direction: column; /* Stacked for better mobile use */
-            gap: 10px;
-        }
+        /* --- New Upload Section --- */
+        .upload-container {
+            max-width: 600px;
+            margin: 0 auto 40px auto;
+            display: flex;
+            gap: 10px;
+        }
 
-        .input-group {
-            display: flex;
-            gap: 10px;
-        }
+        input[type="text"] {
+            flex-grow: 1;
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid #333;
+            background: #222;
+            color: white;
+            outline: none;
+        }
 
-        input {
-            flex-grow: 1;
-            padding: 12px;
-            border-radius: 8px;
-            border: 1px solid #333;
-            background: #222;
-            color: white;
-            outline: none;
-        }
+        button {
+            padding: 10px 20px;
+            border-radius: 8px;
+            border: none;
+            background: var(--accent-color);
+            color: white;
+            cursor: pointer;
+            font-weight: bold;
+            transition: opacity 0.2s;
+        }
 
-        button {
-            padding: 10px 20px;
-            border-radius: 8px;
-            border: none;
-            background: var(--accent-color);
-            color: white;
-            cursor: pointer;
-            font-weight: bold;
-            transition: opacity 0.2s;
-        }
+        button:hover {
+            opacity: 0.8;
+        }
 
-        button:hover {
-            opacity: 0.8;
-        }
+        /* --- Gallery Layout --- */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            grid-gap: 15px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
 
-        /* --- Gallery Layout --- */
-        .gallery {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            grid-gap: 15px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
+        .gallery-item {
+            background: var(--card-bg);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.5s ease;
+        }
 
-        .gallery-item {
-            background: var(--card-bg);
-            border-radius: 12px;
-            overflow: hidden;
-            transition: transform 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            animation: fadeIn 0.5s ease;
-        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+        .gallery-item:hover {
+            transform: scale(1.03);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+        }
 
-        .gallery-item:hover {
-            transform: scale(1.03);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
-        }
+        .gallery-item img {
+            width: 100%;
+            height: auto;
+            display: block;
+            object-fit: cover;
+        }
 
-        .gallery-item img {
-            width: 100%;
-            height: auto;
-            display: block;
-            object-fit: cover;
-        }
-
-        footer {
-            text-align: center;
-            margin-top: 50px;
-            opacity: 0.6;
-            font-size: 0.9rem;
-        }
-    </style>
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            opacity: 0.6;
+            font-size: 0.9rem;
+        }
+    </style>
 </head>
 <body>
 
-    <header>
-        <h1>Admin GIF Collection</h1>
-        <div class="upload-container">
-            <input type="text" id="imgUrl" placeholder="Paste direct image link here (https://...gif)">
-            <div class="input-group">
-                <input type="password" id="adminPass" placeholder="Admin Password">
-                <button onclick="addImage()">Add Image</button>
-            </div>
-        </div>
-    </header>
+    <header>
+      
+        <div class="upload-container">
+            <input type="text" id="imgUrl" placeholder="Paste direct image link here (https://...gif)">
+            <button onclick="addImage()">Add Image</button>
+        </div>
+    </header>
 
-    <main class="gallery" id="imageGrid">
-        <div class="gallery-item"><img src="https://i.ibb.co.com/ksnqwJ14/210981983459800130.gif" alt="GIF"></div>
-        </main>
+    <main class="gallery" id="imageGrid">
+        <div class="gallery-item"><img src="https://i.ibb.co.com/ksnqwJ14/210981983459800130.gif" alt="GIF"></div>
+        <div class="gallery-item"><img src="https://i.ibb.co.com/PZVj3srD/4331847932922209016.gif" alt="GIF"></div>
+        <div class="gallery-item"><img src="https://i.ibb.co.com/VY21jtTH/7920552704222752572.gif" alt="GIF"></div>
+        <div class="gallery-item"><img src="https://i.ibb.co.com/MD4693bs/9555525134201569221.gif" alt="GIF"></div>
+        <div class="gallery-item"><img src="https://i.ibb.co.com/YFgVp7vm/8405415769161464464.gif" alt="GIF"></div>
+        <div class="gallery-item"><img src="https://i.ibb.co.com/d08G2BgL/12708185719911065486.gif" alt="GIF"></div>
+        <div class="gallery-item"><img src="https://i.ibb.co.com/bj4kfZP2/9444568410959156.gif" alt="GIF"></div>
+        <div class="gallery-item"><img src="https://i.ibb.co.com/2Bdf1CV/7397285851842382049.gif" alt="GIF"></div>
+        <div class="gallery-item"><img src="https://i.ibb.co.com/4gwjYMbG/8162691186726529153.gif" alt="GIF"></div>
+        <div class="gallery-item"><img src="https://i.ibb.co.com/VWqYBLth/1164744109845651322.gif" alt="GIF"></div>
+        <div class="gallery-item"><img src="https://i.ibb.co.com/XZW7yh26/1313949662205531477.gif" alt="GIF"></div>
+        <div class="gallery-item"><img src="https://i.ibb.co.com/VpBQp7jJ/1823571235763378650.gif" alt="GIF"></div>
+        <div class="gallery-item"><img src="https://i.ibb.co.com/fdDGGnJ0/5298867792654981964.gif" alt="GIF"></div>
+        <div class="gallery-item"><img src="https://i.ibb.co.com/8td7YD1/9527225950299811872.gif" alt="GIF"></div>
+        <div class="gallery-item"><img src="https://i.ibb.co.com/pBkPkXn6/4625944609495205148.gif" alt="GIF"></div>
+        <div class="gallery-item"><img src="https://i.ibb.co.com/DfHcpkGp/7438839848222827455.gif" alt="GIF"></div>
+        <div class="gallery-item"><img src="https://i.ibb.co.com/VYWwLhJZ/4351037945183404365.gif" alt="GIF"></div>
+        <div class="gallery-item"><img src="https://i.ibb.co.com/V0DbyV60/14273139607113453525.gif" alt="GIF"></div>
+        <div class="gallery-item"><img src="https://i.ibb.co.com/F4tGV6ZB/5520538185616182604.gif" alt="GIF"></div>
+        <div class="gallery-item"><img src="https://i.ibb.co.com/0RYX1bVP/12331754330097085559.gif" alt="GIF"></div>
+        <div class="gallery-item"><img src="https://i.ibb.co.com/KjG7PL10/8988195721744178592.gif" alt="GIF"></div>
+        <div class="gallery-item"><img src="https://i.ibb.co.com/5WPh5vPt/8061782761221244093.gif" alt="GIF"></div>
+        <div class="gallery-item"><img src="https://i.ibb.co.com/BHGW93nM/14538305852314229840.gif" alt="GIF"></div>
+    </main>
 
-    <footer>
-        <p>Built with restricted access</p>
-    </footer>
+    <footer>
+        <p>Built when i was high</p>
+    </footer>
 
-    <script>
-        // Set your password here
-        const ADMIN_PASSWORD = "mysecretpass"; 
+    <script>
+        // Load saved images from LocalStorage on page start
+        window.onload = function() {
+            const savedImages = JSON.parse(localStorage.getItem('myGifs')) || [];
+            savedImages.forEach(url => renderImage(url));
+        };
 
-        window.onload = function() {
-            const savedImages = JSON.parse(localStorage.getItem('myGifs')) || [];
-            savedImages.forEach(url => renderImage(url));
-        };
+        function addImage() {
+            const urlInput = document.getElementById('imgUrl');
+            const url = urlInput.value.trim();
 
-        function addImage() {
-            const urlInput = document.getElementById('imgUrl');
-            const passInput = document.getElementById('adminPass');
-            const url = urlInput.value.trim();
-            const pass = passInput.value;
+            if (url) {
+                renderImage(url);
+                saveToLocalStorage(url);
+                urlInput.value = ''; // Clear input
+            } else {
+                alert("Please paste a valid link!");
+            }
+        }
 
-            // 1. Check Password
-            if (pass !== ADMIN_PASSWORD) {
-                alert("Incorrect Admin Password!");
-                passInput.value = ''; 
-                return;
-            }
+        function renderImage(url) {
+            const grid = document.getElementById('imageGrid');
+            const div = document.createElement('div');
+            div.className = 'gallery-item';
+            div.innerHTML = `<img src="${url}" alt="GIF">`;
+            
+            // This adds the new image to the START of the grid
+            grid.insertBefore(div, grid.firstChild);
+        }
 
-            // 2. Check URL
-            if (url) {
-                renderImage(url);
-                saveToLocalStorage(url);
-                urlInput.value = ''; // Clear inputs
-                passInput.value = '';
-            } else {
-                alert("Please paste a valid link!");
-            }
-        }
-
-        function renderImage(url) {
-            const grid = document.getElementById('imageGrid');
-            const div = document.createElement('div');
-            div.className = 'gallery-item';
-            div.innerHTML = `<img src="${url}" alt="GIF">`;
-            grid.insertBefore(div, grid.firstChild);
-        }
-
-        function saveToLocalStorage(url) {
-            const savedImages = JSON.parse(localStorage.getItem('myGifs')) || [];
-            savedImages.push(url);
-            localStorage.setItem('myGifs', JSON.stringify(savedImages));
-        }
-    </script>
+        function saveToLocalStorage(url) {
+            const savedImages = JSON.parse(localStorage.getItem('myGifs')) || [];
+            savedImages.push(url);
+            localStorage.setItem('myGifs', JSON.stringify(savedImages));
+        }
+    </script>
 </body>
 </html>
